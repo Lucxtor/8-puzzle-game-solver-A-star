@@ -25,10 +25,23 @@ class State():
         # self.cost = self.pathLen 
 
         # Heuristica Simples
-        self.cost = 0
+        # self.cost = self.pathLen
+        # for index, value in enumerate(self.state):
+        #     if int(value)-1 != index and int(value) != 0:
+        #         self.cost += 1
+
+        # Heuristica Otimizada
+        self.cost = self.pathLen
         for index, value in enumerate(self.state):
-            if int(value)-1 != index and int(value) != 0:
-                self.cost += 1
+            valueRightIndex = int(value)-1
+            if valueRightIndex != index and int(value) != 0:
+                line = index // 3 
+                valueRightLine = valueRightIndex // 3
+                lineError = abs(line - valueRightLine)
+                column = index % 3
+                valueRightColumn = valueRightIndex % 3
+                columnError = abs(column - valueRightColumn)
+                self.cost += (lineError + columnError) 
 
     def generateChildren(self):
 

@@ -37,6 +37,6 @@ while open != []:
             if child.pathLen < visited[index].pathLen:
                 visited.remove(visited[index])
                 open.append(child)
-            pass
+
     visited.append(currentState)
     open.sort(key=lambda x: x.cost)
