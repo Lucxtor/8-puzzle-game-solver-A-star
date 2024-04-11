@@ -28,12 +28,15 @@ while open != []:
         if child not in open and child not in visited:
             child.calculateCost()
             open.append(child)
-        elif child in open:
+        elif child in open: # if the child was reached by a shorter path then give the state on open the shorter path
             index = open.index(child)
             if child.pathLen < open[index].pathLen:
                 open[index] = child
-            pass # TODO if the child was reached by a shorter path then give the state on open the shorter path
-        else:
-            pass # TODO if the child was reached by a shorter path then remove the state from closed add the child to open
+        else:  # if the child was reached by a shorter path then remove the state from closed add the child to open
+            index = visited.index(child)
+            if child.pathLen < visited[index].pathLen:
+                visited.remove(visited[index])
+                open.append(child)
+            pass
     visited.append(currentState)
     open.sort(key=lambda x: x.cost)
