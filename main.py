@@ -1,4 +1,5 @@
 import sys
+import time
 
 from states import State
 
@@ -13,11 +14,14 @@ while len(numbers) != 9:
     numbers = list(input("Digite a sequência de 9 números correspondente ao estado do jogo: "))
 
 open.append(State(numbers))
-
+start_time = time.time()
 while open != []:
     currentState = open.pop(0)
     if currentState.isSolution():
-        print('solução') # TODO print path from start to current state
+        end_time = time.time()
+        currentState.evaluatePath()
+        print('Nodos Visitados: %s' % len(visited))
+        print("--- %s segundos ---" % (end_time - start_time))
         break
     children = currentState.generateChildren()
     for child in children:
@@ -25,6 +29,9 @@ while open != []:
             child.calculateCost()
             open.append(child)
         elif child in open:
+            index = open.index(child)
+            if child.pathLen < open[index].pathLen:
+                open[index] = child
             pass # TODO if the child was reached by a shorter path then give the state on open the shorter path
         else:
             pass # TODO if the child was reached by a shorter path then remove the state from closed add the child to open
