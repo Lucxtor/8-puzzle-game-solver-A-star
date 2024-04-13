@@ -19,7 +19,6 @@ class State():
         return False
 
     def calculateCost(self):
-        # TODO apply heuristic
 
         # Custo Uniforme
         # self.cost = self.pathLen 
@@ -31,10 +30,24 @@ class State():
         #         self.cost += 1
 
         # Heuristica Otimizada
+        # self.cost = self.pathLen
+        # for index, value in enumerate(self.state):
+        #     valueRightIndex = int(value)-1
+        #     if valueRightIndex != index and int(value) != 0:
+        #         line = index // 3 
+        #         valueRightLine = valueRightIndex // 3
+        #         lineError = abs(line - valueRightLine)
+        #         column = index % 3
+        #         valueRightColumn = valueRightIndex % 3
+        #         columnError = abs(column - valueRightColumn)
+        #         self.cost += (lineError + columnError) 
+
+        # Heuristica Otimizada + custo diretamente inverso
         self.cost = self.pathLen
         for index, value in enumerate(self.state):
             valueRightIndex = int(value)-1
             if valueRightIndex != index and int(value) != 0:
+                # Distancia até o local correto
                 line = index // 3 
                 valueRightLine = valueRightIndex // 3
                 lineError = abs(line - valueRightLine)
@@ -42,6 +55,13 @@ class State():
                 valueRightColumn = valueRightIndex % 3
                 columnError = abs(column - valueRightColumn)
                 self.cost += (lineError + columnError) 
+                # Diretamente invertida
+                if index % 3 != 2:
+                    if (int(self.state[index+1]) == int(self.state[index])-1):
+                        self.cost += 2
+                elif index // 3 != 2:
+                    if (int(self.state[index+3]) == int(self.state[index])-3):
+                        self.cost += 2
 
     def generateChildren(self):
 

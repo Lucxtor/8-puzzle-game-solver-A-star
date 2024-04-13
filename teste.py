@@ -1,9 +1,11 @@
-# from states import State
+from states import State
 
 # states = [State(['1', '2', '3', '4', '5', '6', '7', '0', '8'], 1, 'primeiro', 1), State(['1', '2', '3', '4', '5', '6', '0', '7', '8'], 2, 'segundo', 2)]
 
-# state = State(['1', '2', '3', '4', '5', '6', '0', '7', '8'], 3, 'terceiro', 3)
+state = State(['2', '1', '6', '4', '5', '3', '7', '8', '0'])
 
+state.calculateCost()
+print(state)
 # for i in states:
 #     print(i)
 # print(state)
@@ -17,5 +19,3 @@
 # for i in states:
 #     print(i)
 # print(state)
-
-print(2//3)
