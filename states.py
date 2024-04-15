@@ -58,10 +58,10 @@ class State():
                 # Diretamente invertida
                 if index % 3 != 2:
                     if (int(self.state[index+1]) == int(self.state[index])-1):
-                        self.cost += 2
+                        self.cost += 5
                 elif index // 3 != 2:
                     if (int(self.state[index+3]) == int(self.state[index])-3):
-                        self.cost += 2
+                        self.cost += 5
 
     def generateChildren(self):
 
